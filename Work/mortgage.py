@@ -11,7 +11,7 @@ extra_payment_end_month = 108
 total_paid = 0.0
 num_months = 0
 
-while principal > 0:
+while (principal - payment) > 0:
     principal = principal * (1 + rate/12) - payment
     total_paid = total_paid + payment
     num_months += 1
