@@ -2,14 +2,18 @@
 #
 # Exercise 1.27
 
+import csv
+
 def portfolio_cost(filename):
     """
     Returns the total cost for all shares from 'filename'
     """
     total_cost = 0
     with open(filename) as fp:
-        for line in fp:
-            stock_name, stock_num, stock_price = line.strip().split(',')
+        rows = csv.reader(fp)
+        headers = next(rows)
+        for row in rows:
+            stock_name, stock_num, stock_price = row
             try:
                 stock_num = int(stock_num)
             except ValueError:
