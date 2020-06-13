@@ -3,6 +3,7 @@
 # Exercise 1.27
 
 import csv
+import sys
 
 def portfolio_cost(filename):
     """
@@ -26,5 +27,10 @@ def portfolio_cost(filename):
         return total_cost
 
 if __name__ == '__main__':
-    cost = portfolio_cost('Data/portfolio.csv')
-    print(f"The total cost for all the shares is {cost:.2f}")
+    # accept input from command line
+    if len(sys.argv) >= 2:
+        filename = sys.argv[1]
+    else:
+        filename = 'Data/portfolio.csv'
+    cost = portfolio_cost(filename)
+    print(f"The total cost for all the shares in {filename} is {cost:.2f}")
