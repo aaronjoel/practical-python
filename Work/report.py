@@ -4,7 +4,7 @@
 
 import csv
 
-def portfolio_cost(filename):
+def read_portfolio(filename):
     '''Reads the given portfolio file into a list of tuples.'''
     portfolio = []
     
