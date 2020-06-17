@@ -54,8 +54,8 @@ def printer(gain_list):
     print(f'{"Name":>10s} {"Shares":>10s} {"Price":>10s} {"Change":>10s}')
     print(f'{delimiter}')
     
-    for record in gain_list:
-        print(f'{record[0]:>10s} {record[1]:>10d} {record[2]:>10.2f} {record[3]:>10.2f}')
+    for name, shares, price, change in gain_list:
+        print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
 
 
 if __name__ == '__main__':
