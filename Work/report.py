@@ -46,16 +46,17 @@ def make_report(portfolio, prices):
     
     return gain_list
 
-def printer(gain_list):
+def printer(gain_list, delimiter_symbol='-'):
     """Formats and prints data from gain_list"""
-    delimiter_base = '-' * 10 + ' '
+    delimiter_base = delimiter_symbol * 11 + ' '
     delimiter = delimiter_base * 4
-    
-    print(f'{"Name":>10s} {"Shares":>10s} {"Price":>10s} {"Change":>10s}')
+ 
+    headers = ('Name', 'Shares', 'Price', 'Change')   
+    print(f'{headers[0]:>11s} {headers[1]:>11s} {headers[2]:>11s} {headers[3]:>11s}')
     print(f'{delimiter}')
     
     for name, shares, price, change in gain_list:
-        print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+        print(f'{name:>11s} {shares:>11d} {price:>10.2f}$ {change:>10.2f}$')
 
 
 if __name__ == '__main__':
