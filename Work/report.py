@@ -20,7 +20,7 @@ def read_portfolio(filename):
 
                 portfolio.append(holding)
             except ValueError:
-                print(f'Row {rowno}: Bad row: {row}'
+                print(f'Row {rowno}: Bad row: {row}')
 
     return portfolio
 
