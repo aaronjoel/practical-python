@@ -77,9 +77,15 @@ def printer(gain_list, delimiter_symbol='-'):
         
         print(f'{change:>10.2f}')
 
+def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
+    '''Generates report from portfolio and price files.'''
+    portfolio = read_portfolio(portfolio_filename)
+    
+    prices = read_prices(prices_filename)
+    
+    report = make_report(portfolio, prices)
+    
+    printer(report)
 
 if __name__ == '__main__':
-    portfolio = read_portfolio('Data/portfolio.csv')
-    prices = read_prices('Data/prices.csv')
-    report = make_report(portfolio, prices)
-    printer(report)
+    portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
