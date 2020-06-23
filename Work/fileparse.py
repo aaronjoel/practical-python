@@ -3,14 +3,15 @@
 # Exercise 3.3
 import csv
 
-def parse_csv(filename: str, select=None, types=None) -> list:
+def parse_csv(filename: str, select=None, types=None, has_headers: bool=False) -> list:
     '''Parse a CSV file into a list of records'''
 
     with open(filename) as f:
         rows = csv.reader(f)
 
         # Read the file headers
-        headers = next(rows)
+        if has_headers:
+            headers = next(rows)
 
         # If a column selector was given, find indices of the specified columns.
         # Also narrow the set of headers userd for resulting dictionaries
@@ -33,7 +34,7 @@ def parse_csv(filename: str, select=None, types=None) -> list:
                 row = [func(val) for func, val in zip(types, row)]
 
             # Make a dictionary
-            record = dict(zip(headers, row))
+            record = dict(zip(headers, row)) if has_headers else tuple(row)
             records.append(record)
  
     return records
