@@ -15,7 +15,7 @@ def parse_csv(filename: str, select=None) -> list:
         # If a column selector was given, find indices of the specified columns.
         # Also narrow the set of headers userd for resulting dictionaries
         if select:
-            indices = [headers.index(colname) for colname if select]
+            indices = [headers.index(colname) for colname in select]
             headers = select
         else:
             indices = []
