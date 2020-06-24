@@ -87,5 +87,15 @@ def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
     
     printer(report)
 
+def main(args: list) -> None:
+    '''Main function driver'''
+    print(f'Running {args[0][:-2]}main...', end='\n\n')
+
+    portfolio_report(args[1], args[2])
+
 if __name__ == '__main__':
-    portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+    import sys
+    if len(sys.argv) < 3:
+        main(['report.py', 'Data/portfolio.csv', 'Data/prices.csv'])
+    else:
+        main(sys.argv[:3])
