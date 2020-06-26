@@ -4,12 +4,14 @@
 
 import csv
 import sys
+import stock
 
 def portfolio_cost(filename):
     """
     Returns the total cost for all shares from 'filename'
     """
     total_cost = 0
+    stocks = []
     with open(filename) as fp:
         rows = csv.reader(fp)
         headers = next(rows)
@@ -25,8 +27,11 @@ def portfolio_cost(filename):
             except ValueError:
                 print(f'Row {rowno}: Bad row: {row}')
                 stock_price = 0.0
-            total_cost += stock_num * stock_price
-        return total_cost
+            
+            stocks.append(stock.Stock(str(record['name']), stock_num, stock_price))
+
+    total_cost = sum([holding.cost() for holding in stocks])
+    return total_cost
 
 if __name__ == '__main__':
     # accept input from command line
