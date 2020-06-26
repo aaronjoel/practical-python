@@ -3,6 +3,7 @@
 # Exercise 2.4
 
 import csv
+import stock
 
 def read_portfolio(filename):
     '''Reads the given portfolio file into a list of tuples.'''
@@ -14,9 +15,9 @@ def read_portfolio(filename):
         for rowno, row in enumerate(rows, start=1):
             record = dict(zip(headers, row))
             try:
-                holding = { 'name': record['name'], 
-                            'shares': int(record['shares']), 
-                            'price': float(record['price']) }
+                holding = stock.Stock(record['name'], 
+                                      int(record['shares']), 
+                                      float(record['price'])) 
 
                 portfolio.append(holding)
             except ValueError:
@@ -46,10 +47,10 @@ def make_report(portfolio, prices):
     gain_list = []
 
     for record in portfolio:
-        share_name = record['name']
+        share_name = record.name
         if share_name in prices:
-            gain = prices[share_name] - record['price']
-            gain_list.append((share_name, record['shares'], prices[share_name], gain))
+            gain = prices[share_name] - record.price
+            gain_list.append((share_name, record.shares, prices[share_name], gain))
     
     return gain_list
 
