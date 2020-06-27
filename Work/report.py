@@ -104,15 +104,16 @@ def portfolio_report(portfolio_filename: str, prices_filename: str, fmt: str='tx
     # Print it out using our new formatter class
     if fmt == 'txt':
         formatter = tableformat.TextTableFormatter()
-    elif fmt == '$txt':
-        printer(report)
     elif fmt == 'csv':
         formatter = tableformat.CSVTableFormatter()
     elif fmt == 'html':
         formatter = tableformat.HTMLTableFormatter()
     else:
-        raise RuntimeError(f'Unknown format {fmt}')
-    print_report(report, formatter)
+        #raise RuntimeError(f'Unknown format {fmt}')
+        printer(report)
+    
+    if formatter:
+        print_report(report, formatter)
     print()
 
 def main(args: list) -> None:
