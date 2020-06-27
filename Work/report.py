@@ -100,7 +100,8 @@ def portfolio_report(portfolio_filename: str, prices_filename: str, fmt: str='tx
     report = make_report(portfolio, prices)
     
     # commented out to make use of our new formatter class
-   
+    formatter = None
+  
     # Print it out using our new formatter class
     if fmt == 'txt':
         formatter = tableformat.TextTableFormatter()
