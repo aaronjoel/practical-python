@@ -4,6 +4,7 @@
 
 import csv
 import stock
+import tableformat
 
 def read_portfolio(filename):
     '''Reads the given portfolio file into a list of tuples.'''
@@ -78,15 +79,32 @@ def printer(gain_list, delimiter_symbol='-'):
         
         print(f'{change:>10.2f}')
 
+def print_report(reportdata, formatter):
+    '''
+    Print a nicely formated table from a list of (name, shares, price, change) tuples.
+    '''
+    formatter.headings(['Name', 'Shares', 'Price', 'Change'])
+    for name, shares, price, change in reportdata:
+        rowdata = [name, str(shares), f'{price:0.2f}', f'{change:0.2f}']
+        formatter.row(rowdata)
+
+
 def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
     '''Generates report from portfolio and price files.'''
-    portfolio = read_portfolio(portfolio_filename)
     
+    # Read data files
+    portfolio = read_portfolio(portfolio_filename)
     prices = read_prices(prices_filename)
     
+    # Create the report data
     report = make_report(portfolio, prices)
     
+    # commented out to make use of our new formatter class
     printer(report)
+
+    # Print it out using our new formatter class
+    formatter = tableformat.TableFormatter()
+    print_report(report, formatter)
 
 def main(args: list) -> None:
     '''Main function driver'''
