@@ -89,7 +89,7 @@ def print_report(reportdata, formatter):
         formatter.row(rowdata)
 
 
-def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
+def portfolio_report(portfolio_filename: str, prices_filename: str, fmt: str='txt') -> None:
     '''Generates report from portfolio and price files.'''
     
     # Read data files
@@ -100,21 +100,18 @@ def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
     report = make_report(portfolio, prices)
     
     # commented out to make use of our new formatter class
-    printer(report)
-    print()
-
+   
     # Print it out using our new formatter class
-    formatter = tableformat.TextTableFormatter()
-    print_report(report, formatter)
-    print()
-
-    # Print it out using csv formatting
-    formatter = tableformat.CSVTableFormatter()
-    print_report(report, formatter)
-    print()
-
-    # Print it out using html formatting
-    formatter = tableformat.HTMLTableFormatter()
+    if fmt == 'txt':
+        formatter = tableformat.TextTableFormatter()
+    elif fmt == '$txt':
+        printer(report)
+    elif fmt == 'csv':
+        formatter = tableformat.CSVTableFormatter()
+    elif fmt == 'html':
+        formatter = tableformat.HTMLTableFormatter()
+    else:
+        raise RuntimeError(f'Unknown format {fmt}')
     print_report(report, formatter)
     print()
 
