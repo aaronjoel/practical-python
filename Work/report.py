@@ -106,6 +106,10 @@ def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
     formatter = tableformat.TextTableFormatter()
     print_report(report, formatter)
 
+    # Print it out using csv formatting
+    formatter = tableformat.CSVTableFormatter()
+    print_report(report, formatter)
+
 def main(args: list) -> None:
     '''Main function driver'''
     print(f'Running {args[0][:-2]}main...', end='\n\n')
