@@ -101,14 +101,22 @@ def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
     
     # commented out to make use of our new formatter class
     printer(report)
+    print()
 
     # Print it out using our new formatter class
     formatter = tableformat.TextTableFormatter()
     print_report(report, formatter)
+    print()
 
     # Print it out using csv formatting
     formatter = tableformat.CSVTableFormatter()
     print_report(report, formatter)
+    print()
+
+    # Print it out using html formatting
+    formatter = tableformat.HTMLTableFormatter()
+    print_report(report, formatter)
+    print()
 
 def main(args: list) -> None:
     '''Main function driver'''
