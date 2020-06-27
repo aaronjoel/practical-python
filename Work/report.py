@@ -103,7 +103,7 @@ def portfolio_report(portfolio_filename: str, prices_filename: str) -> None:
     printer(report)
 
     # Print it out using our new formatter class
-    formatter = tableformat.TableFormatter()
+    formatter = tableformat.TextTableFormatter()
     print_report(report, formatter)
 
 def main(args: list) -> None:
