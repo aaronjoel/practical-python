@@ -100,28 +100,17 @@ def portfolio_report(portfolio_filename: str, prices_filename: str, fmt: str='tx
     report = make_report(portfolio, prices)
     
     # commented out to make use of our new formatter class
-    formatter = None
-  
-    # Print it out using our new formatter class
-    if fmt == 'txt':
-        formatter = tableformat.TextTableFormatter()
-    elif fmt == 'csv':
-        formatter = tableformat.CSVTableFormatter()
-    elif fmt == 'html':
-        formatter = tableformat.HTMLTableFormatter()
-    else:
-        #raise RuntimeError(f'Unknown format {fmt}')
-        printer(report)
-    
-    if formatter:
-        print_report(report, formatter)
-    print()
+    formatter = tableformat.create_formatter(fmt)
 
+    # Print it out
+    print_report(report, formatter)
+  
 def main(args: list) -> None:
     '''Main function driver'''
     print(f'Running {args[0][:-2]}main...', end='\n\n')
 
     portfolio_report(args[1], args[2])
+    print()
 
 if __name__ == '__main__':
     import sys
