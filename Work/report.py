@@ -109,7 +109,7 @@ def main(args: list) -> None:
     '''Main function driver'''
     print(f'Running {args[0][:-2]}main...', end='\n\n')
 
-    portfolio_report(args[1], args[2])
+    portfolio_report(args[1], args[2], args[3])
     print()
 
 if __name__ == '__main__':
@@ -117,4 +117,4 @@ if __name__ == '__main__':
     if len(sys.argv) < 3:
         main(['report.py', 'Data/portfolio.csv', 'Data/prices.csv'])
     else:
-        main(sys.argv[:3])
+        main(sys.argv[:4])
