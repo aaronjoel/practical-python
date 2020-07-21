@@ -66,3 +66,12 @@ def create_formatter(name: str) -> TableFormatter:
         return HTMLTableFormatter()
     else:
         raise RuntimeError(f'Unknown format {fmt}')
+
+def print_table(list_of_portfolio: list, list_of_attrs: list, formatter) -> None:
+    '''
+    Print a nicely formatted table from a list of attributes
+    '''
+    formatter.headings(list_of_attrs)
+    for portfolio in list_of_portfolio:
+        row_data = [str(getattr(portfolio, attr_name)) for attr_name in list_of_attrs]
+        formatter.row(row_data)
