@@ -5,6 +5,13 @@ class Stock:
         self.shares = shares if shares > 0 else 0
         self.price = price
     
+    @shares.setter
+    def shares(self, value):
+        if not isinstance(value, int):
+            raise TypeError('Expected int')
+        self._shares = value
+
+    @property   
     def cost(self) -> float:
         return self.shares * self.price
 
