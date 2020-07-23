@@ -1,10 +1,14 @@
 class Stock:
-
+    __slots__ = ('name', '_shares', 'price')
     def __init__(self, name: str, shares: int, price: float) -> None:
         self.name = name
-        self.shares = shares if shares > 0 else 0
+        self.shares = shares 
         self.price = price
     
+    @property
+    def shares(self):
+        return self._shares
+
     @shares.setter
     def shares(self, value):
         if not isinstance(value, int):
