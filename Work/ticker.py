@@ -2,6 +2,8 @@
 
 from follow import follow
 import csv
+import report
+import tableformat
 
 def parse_stock_data(lines):
     rows = csv.reader(lines)
@@ -26,6 +28,21 @@ def filter_symbols(rows, names):
     for row in rows:
         if row['name'] in names:
             yield row
+
+def ticker(portfolio_file: str, stock_file: str, format_ext: str) -> None:
+    portfolio = report.read_portfolio(portfolio_file)
+    stock_rows = parse_stock_data(follow(stock_file))
+    rows = filter_symbols(stock_rows, portfolio)
+
+    formatter = tableformat.create_formatter(format_ext)
+
+    
+    formatter.headings(['Name', 'Price', 'Change'])
+
+    for row in rows:
+        rowdata = [f'{data:0.2f}' if isinstance(data, float) else data for data in row.values()]
+        formatter.row(rowdata)
+
 
 if __name__ == '__main__':
     lines = follow('Data/stocklog.csv')
