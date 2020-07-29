@@ -22,6 +22,11 @@ def make_dicts(rows, headers):
     for row in rows:
         yield dict(zip(headers, row))
 
+def filter_symbols(rows, names):
+    for row in rows:
+        if row['name'] in names:
+            yield row
+
 if __name__ == '__main__':
     lines = follow('Data/stocklog.csv')
     rows = parse_stock_data(lines)
